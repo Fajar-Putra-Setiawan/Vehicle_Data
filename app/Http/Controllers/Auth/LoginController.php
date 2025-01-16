@@ -32,13 +32,13 @@ class LoginController extends Controller
 
         // Redirect based on role
         if ($user->role === 'admin') {
-            return '/vehiclesAdmin';
+            return '/dashboardAdmin';
         } elseif ($user->role === 'user') {
-            return '/vehicles';
+            return '/dashboardUser';
         }
 
         // Default redirect
-        return '/homes';
+        return '/';
     }
 
     /**

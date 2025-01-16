@@ -6,7 +6,7 @@
     <aside id="sidebar" class="sidebar">
         <ul class="sidebar-nav" id="sidebar-nav">
             <li class="nav-item">
-                <a class="nav-link collapsed" href="vehiclesAdmin.index">
+                <a class="nav-link collapsed" href="{{route('dashboard')}}">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
@@ -20,7 +20,7 @@
             </li><!-- End Presensi Nav -->
 
             <li class="nav-item">
-                <a class="nav-link" href="vehiclesAdmin.index">
+                <a class="nav-link" href="">
                     <i class="bx bxs-car"></i>
                     <span>Vehicle</span>
                 </a>
@@ -46,7 +46,7 @@
 
             <div class="col-md-6">
                 <div class="form-group">
-                    <form method="get" action="/search">
+                    <form method="get" action="/searchAdmin">
                         <div class="input-group">
                             <input class="form-control" name="search" placeholder="Search..." value="{{ isset($search) ? $search : ''}}">
                             <button type="submit" class="btn btn-primary">Search</button>

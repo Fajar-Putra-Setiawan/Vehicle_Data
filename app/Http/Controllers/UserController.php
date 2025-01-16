@@ -38,10 +38,8 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
 
-    public function edit(User $id)
+    public function edit(User $user) // Gunakan model binding dengan parameter $user
     {
-        $user = User::findOrFail($id);
-        dd($user);
         return view('admin.edit', compact('user'));
     }
 
@@ -59,12 +57,12 @@ class UserController extends Controller
             'role' => $request->role,
         ]);
 
-        return redirect()->route('admin.index')->with('success', 'User updated successfully.');
+        return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
 
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('admin.index')->with('success', 'User deleted successfully.');
+        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
     }
 }

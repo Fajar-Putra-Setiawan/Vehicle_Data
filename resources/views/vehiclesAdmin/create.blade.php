@@ -8,7 +8,7 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('vehicles.index') }}">
+                <a class="nav-link collapsed" href="{{ route('dashboard') }}">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
@@ -22,7 +22,7 @@
             </li><!-- End Presensi Nav -->
 
             <li class="nav-item">
-                <a class="nav-link" href="vehiclesAdmin.index">
+                <a class="nav-link" href="{{route('vehiclesAdmin.index')}}">
                     <i class="bx bxs-car"></i>
                     <span>Vehicle</span>
                 </a>

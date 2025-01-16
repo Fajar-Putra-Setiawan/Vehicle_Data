@@ -53,12 +53,13 @@
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#"
                         data-bs-toggle="dropdown">
                         {{-- <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"> --}}
-                        <span class="d-none d-md-block dropdown-toggle ps-2">Admin</span>
+                        <span class="d-none d-md-block dropdown-toggle ps-2">Hello, {{ Auth::user()->name ?? 'Guest' }} </span>
                     </a><!-- End Profile Iamge Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
-                            <h6>Admin</h6>
+                            <h6>{{ Auth::user()->name ?? 'Guest' }}</h6>
+                            <span>{{ ucfirst(Auth::user()->role ?? 'User') }}</span>
                         </li>
 
                         <a class="dropdown-item" href="{{ route('logout') }}"
@@ -89,7 +90,7 @@
             <h1>@yield('crumb')</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">@yield('crumb1')</a></li>
+                    <li class="breadcrumb-item"><a href="dashboard">@yield('crumb1')</a></li>
                     <li class="breadcrumb-item active">@yield('crumb')</li>
                 </ol>
             </nav>

@@ -79,15 +79,36 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img id="modalImage" src="" alt="Gambar" class="img-fluid">
+                <!-- Tampilkan gambar jika ada -->
+                <img id="modalImage" src="" alt="Gambar" class="img-fluid" style="display: none;">
+
+                <!-- Tampilkan pesan jika gambar tidak ada -->
+                <p id="noImageText">Tidak ada gambar</p>
             </div>
         </div>
     </div>
 </div>
+
 <script>
-    // Ketika modal dibuka, ganti sumber gambar dengan gambar yang diklik
     $('#imageModal').on('show.bs.modal', function (e) {
         var imageUrl = $(e.relatedTarget).data('image');
-        $('#modalImage').attr('src', imageUrl);
+        var modalImage = $('#modalImage');
+        var noImageText = $('#noImageText');
+
+        // Reset visibility
+        modalImage.hide();
+        noImageText.hide();
+
+        // Cek apakah gambar ada
+        var img = new Image();
+        img.onload = function () {
+            // Jika gambar ada, tampilkan gambar
+            modalImage.attr('src', imageUrl).show();
+        };
+        img.onerror = function () {
+            // Jika gambar tidak ada, tampilkan pesan
+            noImageText.show();
+        };
+        img.src = imageUrl;
     });
 </script>

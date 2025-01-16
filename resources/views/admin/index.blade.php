@@ -6,14 +6,14 @@
     <aside id="sidebar" class="sidebar">
         <ul class="sidebar-nav" id="sidebar-nav">
             <li class="nav-item">
-                <a class="nav-link collapsed" href="vehiclesAdmin.index">
+                <a class="nav-link collapsed" href="{{ route('dashboard') }}">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
             </li><!-- End Dashboard Nav -->
 
             <li class="nav-item">
-                <a class="nav-link" href="admin.index">
+                <a class="nav-link" href="">
                     <i class="bi bi-people"></i>
                     <span>User</span>
                 </a>
@@ -51,7 +51,7 @@
                         <th scope="col">No</th>
                         <th scope="col">Nama User</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Password</th>
+                        <th scope="col">Role</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -61,7 +61,7 @@
                             <th scope="row">{{$loop->iteration}}</th>
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
-                            <td>{{$user->password}}</td>
+                            <td>{{$user->role}}</td>
                             <td><a href="{{route('users.edit', $user->id)}}" type="button" class="btn btn-warning">Detail</a></td>
                         </tr>
                     @endforeach

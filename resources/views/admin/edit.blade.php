@@ -8,21 +8,21 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('vehicles.index') }}">
+                <a class="nav-link collapsed" href="{{ route('dashboard') }}">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('users.index') }}">
+                <a class="nav-link " href="{{ route('users.index') }}">
                     <i class="bi bi-people"></i>
                     <span>User</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('vehiclesAdmin.index') }}">
+                <a class="nav-link collapsed" href="{{ route('vehiclesAdmin.index') }}">
                     <i class="bx bxs-car"></i>
                     <span>Vehicle</span>
                 </a>
@@ -45,15 +45,28 @@
                 <div class="row mb-3">
                     <label for="name" class="col-sm-2 col-form-label">Nama</label>
                     <div class="col-sm-10">
-                        <input type="text" name="name" id="name" class="form-control" value="{{$users->name}}">
+                        <input type="text" name="name" id="name" class="form-control" value="{{$user->name}}">
                     </div>
                 </div>
 
                 <div class="row mb-3">
                     <label for="email" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
-                        <input type="email" name="email" id="email" class="form-control" value="{{$users->email}}">
+                        <input type="email" name="email" id="email" class="form-control" value="{{$user->email}}">
                         @error('email')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="role" class="col-sm-2 col-form-label">Role</label>
+                    <div class="col-sm-10">
+                        <select name="role" id="role" class="form-control" value="{{$user->role}}">
+                            <option value="user">User</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                        @error('role')
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
@@ -65,6 +78,12 @@
                     </div>
                 </div>
 
+            </form>
+
+            <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: inline;">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Hapus</button>
             </form>
         </div>
     </div>

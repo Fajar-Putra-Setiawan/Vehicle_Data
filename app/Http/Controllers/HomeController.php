@@ -28,7 +28,7 @@ class HomeController extends Controller
 
         // Redirect based on role
         if ($user->role === 'admin') {
-            return redirect()->route('users.index');
+            return redirect()->route('dashboard');
         } elseif ($user->role === 'user') {
             return redirect()->route('vehicles.index');
         }
