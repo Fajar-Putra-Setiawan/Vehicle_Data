@@ -39,7 +39,7 @@
                     <form action="{{ route('vehiclesAdmin.destroy', $vehicle->id) }}" method="POST" style="display: inline;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Hapus</button>
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure want to delete this item??')">Hapus</button>
                     </form>
                 </td>
             </tr>

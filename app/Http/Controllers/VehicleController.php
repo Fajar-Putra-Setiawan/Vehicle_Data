@@ -35,8 +35,6 @@ class VehicleController extends Controller
     public function export()
     {
         return Excel::download(new VehicleExport, 'vehicles.xlsx');
-        // Melakukan redirect setelah ekspor
-        return redirect()->route('vehicles.index')->with('success', 'Data kendaraan berhasil diekspor!');
     }
 
     /**

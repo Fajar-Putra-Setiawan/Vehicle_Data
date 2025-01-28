@@ -58,9 +58,32 @@
 
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Total Harga</label>
-                    <input type="text" name="total_price" class="form-control" required>
+                    <input type="text" name="total_price" class="form-control" id="priceInput" required>
                 </div>
+                <script>
+                var dengan_rupiah = document.getElementById('priceInput');
+                dengan_rupiah.addEventListener('keyup', function(e){
+                    dengan_rupiah.value = formatRupiah(this.value, 'Rp. ');
+                });
 
+                /* Fungsi */
+                function formatRupiah(angka, prefix)
+                {
+                    var number_string = angka.replace(/[^,\d]/g, '').toString(),
+                        split    = number_string.split(','),
+                        sisa     = split[0].length % 3,
+                        rupiah     = split[0].substr(0, sisa),
+                        ribuan     = split[0].substr(sisa).match(/\d{3}/gi);
+
+                    if (ribuan) {
+                        separator = sisa ? '.' : '';
+                        rupiah += separator + ribuan.join('.');
+                    }
+
+                    rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+                    return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+                }
+                </script>
                 <div class="row mb-3">
                     <label for="uploadImage" class="col-sm-2 col-form-label">Unggah Gambar</label>
                     <div class="col-sm-10">
@@ -78,7 +101,7 @@
                 <div class="row mb-3">
                     <label for="inputDate" class="col-sm-2 col-form-label">Tanggal Masuk</label>
                     <div class="col-sm-10">
-                        <input type="date" class="form-control" name="entry_date">
+                        <input type="date" class="form-control" name="entry_date" required>
                     </div>
                 </div>
 

@@ -35,8 +35,6 @@ class VehiclesAdminController extends Controller
     public function export()
     {
         return Excel::download(new VehicleExport, 'vehicles_admin.xlsx');
-        // Melakukan redirect setelah ekspor
-        return redirect()->route('vehiclesAdmin.index')->with('success', 'Data kendaraan berhasil diekspor!');
     }
 
     /**
@@ -61,36 +59,31 @@ class VehiclesAdminController extends Controller
             'vehicle_photo' => 'nullable|image|mimes:jpeg,jpg,png',
             'special_notes' => 'nullable',
         ]);
+
+        // Proses total_price untuk menghapus format "Rp." dan "."
+        $totalPrice = str_replace(['Rp.', '.', ' '], '', $request->total_price);
+
+        // Tambahkan logika untuk memproses foto jika ada
         $image = $request->file('vehicle_photo');
-        // Tambahkan pengecekan apakah file diunggah
         if ($image) {
             $image->storeAs('public/vehicle', $image->hashName());
-
-            Vehicle::create([
-                'license_plate' => $request->license_plate,
-                'entry_date' => $request->entry_date,
-                'car_merk' => $request->car_merk,
-                'total_price' => $request->total_price,
-                'damage_details' => $request->damage_details,
-                'vehicle_photo' => $image->hashName(),
-                'special_notes' => $request->special_notes,
-            ]);
-
-            return redirect()->route('vehiclesAdmin.index')->with('success', 'Vehicle added successfully.');
+            $vehiclePhoto = $image->hashName();
         } else {
-            // Tambahkan penanganan jika file tidak diunggah
-            Vehicle::create([
-                'license_plate'     => $request->license_plate,
-                'damage_details'   => $request->damage_details,
-                'car_merk' => $request->car_merk,
-                'entry_date' => $request->entry_date,
-                'total_price'   => $request->total_price,
-                'special_notes'   => $request->special_notes,
-            ]);
-
-            return redirect()->route('vehiclesAdmin.index')->with('success', 'Vehicle added successfully.');
+            $vehiclePhoto = null;
         }
 
+        // Simpan data ke database
+        Vehicle::create([
+            'license_plate' => $request->license_plate,
+            'damage_details' => $request->damage_details,
+            'car_merk' => $request->car_merk,
+            'entry_date' => $request->entry_date,
+            'total_price' => $totalPrice, // Simpan total harga yang sudah diproses
+            'vehicle_photo' => $vehiclePhoto,
+            'special_notes' => $request->special_notes,
+        ]);
+
+        return redirect()->route('vehiclesAdmin.index')->with('success', 'Vehicle added successfully.');
     }
 
     /**
